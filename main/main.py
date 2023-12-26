@@ -28,3 +28,21 @@ X = data.iloc[:,1:]
 Y = data['Energie']
 #split the data into training data and test data
 x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, shuffle=False)
+
+
+poly = PolynomialFeatures(degree=3, include_bias=False)
+poly_features = poly.fit_transform(X)
+print(poly_features)
+poly_reg_model = LinearRegression()
+poly_reg_model.fit(poly_features, Y)
+y_predicted = poly_reg_model.predict(poly_features)
+R_score = r2_score(Y, y_predicted)
+print(f"R_scored: {R_score}")
+plt.figure(figsize=(10,4))
+plt.title("PolynomialREgression",size=6)
+plt.scatter(X,Y)
+plt.plot(X,y_predicted,c="red")
+plt.xlabel('x')
+plt.ylabel("y")
+plt.show()
+
