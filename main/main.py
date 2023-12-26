@@ -23,7 +23,8 @@ data['Year'] = data['Date'].dt.year
 # remove the first column 'Date'
 data = data.iloc[:,1:]
 
-#split the data 
+#split the data into features "X" and target "Y"
 X = data.iloc[:,1:]
 Y = data['Energie']
+#split the data into training data and test data
 x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, shuffle=False)
