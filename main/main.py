@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import r2_score
+from sklearn.metrics import r2_score , mean_squared_error
 data = pd.read_csv("/home/wahid/Electricity_Consumption_Prediction_System/main/Electricity_consumption_history.csv")
 
 #delet the "typedejour" column because ae do not need it
@@ -42,7 +42,9 @@ poly_reg_model.fit(x_train, y_train)
 # Prediction
 y_predicted = poly_reg_model.predict(x_test)
 
-# Model Evaluation
+# Model Evaluation using R squared and cost function(mean squared error)
 R2_score = r2_score(y_test, y_predicted)
+mse = mean_squared_error(y_test,y_predicted)
 print(f"R2 score: {R2_score}")
+print(f"mean squared error: {mse}")
 
