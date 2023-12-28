@@ -48,7 +48,6 @@ mse = mean_squared_error(y_test,y_predicted)
 print(f"R2 score: {R2_score}")
 print(f"mean squared error: {mse}")
 
-# Data Visualization (plot the data)
 plt.scatter(y_test.index,y_test,label='y actual',c='blue')
 plt.scatter(y_test.index,y_predicted,label='y_predicted',c='red')
 plt.xlabel('index')
@@ -56,3 +55,26 @@ plt.ylabel('Y')
 plt.title('Polynomial Regression')
 plt.legend()
 plt.show()
+
+
+# User input for prediction
+print("Enter the features for prediction:")
+tmax_input = float(input("Tmax: "))
+day_input = int(input("Day: "))
+month_input = int(input("Month: "))
+year_input = int(input("Year: "))
+
+# Prepare input for prediction
+input_data = pd.DataFrame({
+    'Tmax': [tmax_input ],
+    'Day': [day_input ],
+    'Month': [month_input ],
+    'Year': [year_input ]
+})
+
+# Transform input data
+input_data_poly = poly.transform(input_data)
+
+# Prediction
+predicted_consumption = poly_reg_model.predict(input_data_poly)
+print(f"Predicted Consumption: {predicted_consumption[0]}")
