@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeRegressor, plot_tree
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error , r2_score, mean_absolute_error
-
+#this function just for convert the name of day to a number
 def convert_typedejour_to_number(day):
     days_mapping = {
         'Sunday': 1,
@@ -46,7 +46,7 @@ x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2,random_s
 
 regressor = DecisionTreeRegressor(criterion='squared_error', random_state=100)
 regressor.fit(x_train, y_train)
-# Make predictions on the test set
+# Make predictions on the test data
 y_pred = regressor.predict(x_test)
 
 
@@ -57,10 +57,10 @@ mae = mean_absolute_error(y_test,y_pred)
 print(f'Mean Squared Error: {mse}')
 print(f'Mean Absolute Error: {mae}')
 print(f'r2 score: {r2Score}')
-
+#plot the tree
 plot_tree(regressor)
 plt.show()
-
+#plot the results and compare them with the original points
 plt.scatter(y_test.index,y_test,label='y actual',c='blue')
 plt.scatter(y_test.index,y_pred,label='y_predicted',c='red')
 plt.xlabel('index')
@@ -68,11 +68,11 @@ plt.ylabel('Y')
 plt.title('Polynomial Regression')
 plt.legend()
 plt.show()
-
+#Optimizing part using random forest regressor
 RFregressor = RandomForestRegressor(n_estimators=100, random_state=100)
 RFregressor.fit(x_train, y_train)
 
-# Make predictions on the test set
+# Make predictions
 y_pred = RFregressor.predict(x_test)
 
 # Evaluate the model
@@ -82,11 +82,11 @@ mae = mean_absolute_error(y_test, y_pred)
 print(f'Mean Squared Error: {mse}')
 print(f'Mean Absolute Error: {mae}')
 print(f'R2 score: {r2Score}')
-# Plot a tree from the forest (optional)
+# Plot a tree from the forest
 # You can't directly plot all trees in a Random Forest, but you can plot a single decision tree from it
 plot_tree(RFregressor.estimators_[50]) # Choose a tree from the forest
 plt.show()
-
+#plot the results and compare them with the original points
 plt.scatter(y_test.index, y_test, label='y actual', c='blue')
 plt.scatter(y_test.index, y_pred, label='y_predicted', c='red')
 plt.xlabel('index')
@@ -102,7 +102,7 @@ day_input = int(input("Day: "))
 month_input = int(input("Month: "))
 year_input = int(input("Year: "))
 
-# Prepare input for prediction
+# Prepare input data for prediction
 day_of_week = convert_typedejour_to_number(day_of_week)
 input_data = pd.DataFrame({
     'Typedejour': [day_of_week],
