@@ -36,20 +36,20 @@ poly_features = poly.fit_transform(X)
 x_train, x_test, y_train, y_test = train_test_split(poly_features, Y, test_size=0.2,random_state=100)
 
 # Train the polynomial regression model
-poly_reg_model = LinearRegression()
-poly_reg_model.fit(x_train, y_train)
+model = LinearRegression()
+model.fit(x_train, y_train)
 
 # Prediction
-y_predicted = poly_reg_model.predict(x_test)
+y_pred = model.predict(x_test)
 
 # Model Evaluation using R squared and cost function(mean squared error)
-R2_score = r2_score(y_test, y_predicted)
-mse = mean_squared_error(y_test,y_predicted)
+R2_score = r2_score(y_test, y_pred)
+mse = mean_squared_error(y_test,y_pred)
 print(f"R2 score: {R2_score}")
 print(f"mean squared error: {mse}")
 
 plt.scatter(y_test.index,y_test,label='y actual',c='blue')
-plt.scatter(y_test.index,y_predicted,label='y_predicted',c='red')
+plt.scatter(y_test.index,y_pred,label='y_predicted',c='red')
 plt.xlabel('index')
 plt.ylabel('Y')
 plt.title('Polynomial Regression')
@@ -76,5 +76,5 @@ input_data = pd.DataFrame({
 input_data_poly = poly.transform(input_data)
 
 # Prediction
-predicted_consumption = poly_reg_model.predict(input_data_poly)
+predicted_consumption = model.predict(input_data_poly)
 print(f"Predicted Consumption: {predicted_consumption[0]}")
